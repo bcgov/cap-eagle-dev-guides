@@ -1,21 +1,22 @@
+curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/shell_helper.sh;
+source ./shell_helper.sh;
+
 asdfProfileWriterBrew(){
     local _profile_file=$1;
-    if [[ ! -e "$_profile_file" ]]
-    then
+    if [[ ! -e "$_profile_file" ]]; then
         touch "$_profile_file";
     fi
     if ! grep "/asdf.sh" "$_profile_file"; then
-        echo ". $(brew --prefix asdf)/asdf.sh" >> "$_profile_file";
+        echo "\n. $(brew --prefix asdf)/asdf.sh" >> "$_profile_file";
     fi
     if ! grep "/asdf.bash" "$_profile_file"; then
-        echo ". $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" >> "$_profile_file";
+        echo "\n. $(brew --prefix asdf)/etc/bash_completion.d/asdf.bash" >> "$_profile_file";
     fi
 }
 
 asdfProfileWriterNonBrew(){
     local _profile_file=$1;
-    if [[ ! -e "$_profile_file" ]]
-    then
+    if [[ ! -e "$_profile_file" ]]; then
         touch "$_profile_file";
     fi
     if ! grep "/asdf.sh" "$_profile_file"; then
@@ -40,8 +41,7 @@ asdfProfileSettings(){
 
 envProfileSettings(){
     local _profile_file=$1;
-    if [[ ! -e "$_profile_file" ]]
-    then
+    if [[ ! -e "$_profile_file" ]]; then
         touch "$_profile_file";
     fi
     local _profile_file_before=$(date -r "$_profile_file" "+%m-%d-%Y %H:%M:%S");
