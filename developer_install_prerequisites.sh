@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/developer_install_helper.sh;
+curl -LJO https://raw.githubusercontent.com/bcgov/cap-eagle-dev-guides/master/developer_install_helper.sh;
 source ./developer_install_helper.sh;
 
 PACKAGE_MANAGER="";
@@ -56,37 +56,24 @@ elif [[ "$PACKAGE_MANAGER" == "yum" ]]; then
     sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc;
     sudo sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo';
     yum check-update;
-    sudo yum -y install git code make;
+    sudo yum -y install code;
+    sudo yum -y install epel-release;
+    sudo yum -y install coreutils automake autoconf openssl libtool unixodbc make jq unzip curl git mongodb-server mongodb;
 elif [[ "$PACKAGE_MANAGER" == "apt" ]]; then
     sudo apt-get update && sudo apt-get -y upgrade;
      # This here is for vscode
-    sudo apt install software-properties-common apt-transport-https wget
+    sudo apt-get install software-properties-common apt-transport-https wget
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
-    sudo apt update
-    sudo apt-get -y install code
-
+    sudo apt-get update;
+    sudo apt-get -y install code;
     sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/;
     sudo apt-get install apt-transport-https;
-    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10;
-    echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
+    #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10;
+    #echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
     sudo apt-get update;
-    sudo apt-get -y install build-essential git-core
-    sudo apt-get install -y mongodb-org=4.0.3 mongodb-org-server=4.0.3 mongodb-org-shell=4.0.3 mongodb-org-mongos=4.0.3 mongodb-org-tools=4.0.3 code
+    sudo apt-get -y install build-essential coreutils automake autoconf openssl libtool unixodbc unzip curl git mongodb make jq;
 
-    if $WSL ; then
-      # If this doesn't work follow the manual installation steps in the windows readme
-      wget https://www.mongodb.org/static/pgp/server-4.0.asc
-      sudo apt-key add server-4.0.asc
-      rm server-4.0.asc
-      sudo apt-get update
-      curl -sL "https://www.mongodb.org/static/pgp/server-4.0.asc?_ga=2.264892495.1953852568.1531143056-750073170.1531143056" | sudo apt-key add
-     sudo apt-get install -y mongodb-org
-    else
-     echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list
-      sudo apt-get update
-     sudo apt-get install -y mongodb-org
-    fi
 else
     echo -e \\n"Packages not installed.\\n"\\n
     exit 1;
