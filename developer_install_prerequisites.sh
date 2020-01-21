@@ -54,13 +54,13 @@ elif [[ "$PACKAGE_MANAGER" == "yum" ]]; then
 elif [[ "$PACKAGE_MANAGER" == "apt" ]]; then
     sudo apt-get update && sudo apt-get -y upgrade;
      # This here is for vscode
-    sudo apt-get install software-properties-common apt-transport-https wget
+    sudo apt-get -y install software-properties-common apt-transport-https wget
     wget -q https://packages.microsoft.com/keys/microsoft.asc -O- | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main"
     sudo apt-get update;
     sudo apt-get -y install code;
     sudo install -o root -g root -m 644 packages.microsoft.gpg /usr/share/keyrings/;
-    sudo apt-get install apt-transport-https;
+    sudo apt-get -y install apt-transport-https;
     #sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10;
     #echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
     sudo apt-get update;
