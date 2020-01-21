@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/davera/cap-eagle-dev-guides/master/setup_helper.sh;
+curl -LJO https://raw.githubusercontent.com/daveram/cap-eagle-dev-guides/master/setup_helper.sh;
 source ./setup_helper.sh;
 
 checkDependencies;

@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/davera/cap-eagle-dev-guides/master/shell_helper.sh;
+curl -LJO https://raw.githubusercontent.com/daveram/cap-eagle-dev-guides/master/shell_helper.sh;
 source ./shell_helper.sh;
 
 asdfProfileWriterBrew(){
