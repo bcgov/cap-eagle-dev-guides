@@ -2,6 +2,7 @@ curl -LJO https://raw.githubusercontent.com/daveram/cap-eagle-dev-guides/master/
 source ./developer_install_helper.sh;
 
 PACKAGE_MANAGER="";
+IDLIKE="$(grep ID_LIKE /etc/os-release | awk -F '=' '{print $2}')"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
     # Mac OSX
@@ -11,27 +12,18 @@ elif [[ "$OSTYPE" == "cygwin"* || "$OSTYPE" == "msys"* || "$OSTYPE" == "win"* ]]
     # POSIX compatibility layer and Linux environment emulation for Windows
     # Lightweight shell and GNU utilities compiled for Windows (part of MinGW)
     PACKAGE_MANAGER="choco";
-elif [[ "$OSTYPE" == "linux"* ]]; then
-    if grep -qi Microsoft /proc/sys/kernel/osrelease 2> /dev/null; then
-        # Need this for the installation of mongodb
-        WSL=true
-        PACKAGE_MANAGER="apt";
-    else
-        # Win10 Subsystem will folow this path aswell
-        # Linux
-        DISTRO=$(lsb_release -ds 2>/dev/null || cat /etc/*release 2>/dev/null | head -n1 || uname -om);
-        if [[ "$DISTRO" == *"hat"* || "$DISTRO" == *"centos"* ]]; then
-            PACKAGE_MANAGER="yum";
-        elif [[ "$OSTYPE" == *"debian"* || "$OSTYPE" == *"ubuntu"* ]]; then
-            PACKAGE_MANAGER="apt";
-        fi
-    fi
+elif [[ "$IDLIKE" == *"debian"* ]]; then
+    # Debian base like Ubuntu
+    PACKAGE_MANAGER="apt";
+elif [[ "$IDLIKE" == *"fedora"* ]]; then
+    # Fedora base like CentOS or RHEL
+    PACKAGE_MANAGER="yum";
 elif [[ "$OSTYPE" == "bsd"* || "$OSTYPE" == "solaris"* ]]; then
     # not supported
-    echo -e \\n"OS not supported. Supported OS:\\nMac OSX\\nWindows\\nDebian\\nFedora\\n"\\n;
+    echo -e \\n"OS not supported. Supported OS:\\nMac OSX\\nDebian\\nFedora\\n"\\n;
     exit 1;
 else
-    echo -e \\n"OS not detected. Supported OS:\\nMac OSX\\nWindows\\nDebian\\nFedora\\n"\\n;
+    echo -e \\n"OS not detected. Supported OS:\\nMac OSX\\nDebian\\nFedora\\n"\\n;
     exit 1;
 fi
 
