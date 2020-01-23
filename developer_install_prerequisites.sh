@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/daveram/cap-eagle-dev-guides/master/developer_install_helper.sh;
+curl -LJO https://raw.githubusercontent.com/bcgov/cap-eagle-dev-guides/master/developer_install_helper.sh;
 source ./developer_install_helper.sh;
 
 PACKAGE_MANAGER="";
