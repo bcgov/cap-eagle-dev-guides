@@ -38,7 +38,10 @@ if [[ "$PACKAGE_MANAGER" == "brew" ]]; then
     brew install coreutils automake autoconf openssl \
     libyaml readline libxslt libtool unixodbc \
     unzip curl \
-    git mongodb make;
+    git make;
+    brew tap mongodb/brew;
+    brew install mongodb-community@3.6;
+    brew services start mongodb-community;
     brew cask install visual-studio-code;
 elif [[ "$PACKAGE_MANAGER" == "choco" ]]; then
     sudo PowerShell -NoProfile -ExecutionPolicy remotesigned -Command ". 'install_choco.ps1;";
@@ -72,10 +75,7 @@ else
 fi
 
 curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/vscodeextensions.txt;
-
-if !$WSL ; then
-  source ./vscodeextensions.txt;
-fi
+source ./vscodeextensions.txt;
 
 envProfileSettings "${PROFILE_FILE}";
 envProfileSettings "${RC_FILE}";
