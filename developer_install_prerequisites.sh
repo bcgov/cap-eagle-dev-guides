@@ -43,6 +43,7 @@ if [[ "$PACKAGE_MANAGER" == "brew" ]]; then
     brew install mongodb-community@3.6;
     brew services start mongodb-community;
     brew cask install visual-studio-code;
+    brew install openshift-cli@3.11.0;
 elif [[ "$PACKAGE_MANAGER" == "choco" ]]; then
     sudo PowerShell -NoProfile -ExecutionPolicy remotesigned -Command ". 'install_choco.ps1;";
     choco upgrade chocolatey;
@@ -54,6 +55,11 @@ elif [[ "$PACKAGE_MANAGER" == "yum" ]]; then
     sudo yum -y install code;
     sudo yum -y install epel-release;
     sudo yum -y install coreutils automake autoconf openssl libtool unixodbc make jq unzip curl git mongodb-server mongodb;
+    # OpenShift client install
+    curl -LO https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
+    tar zxvf openshift-origin-client-tools*
+    sudo mv openshift-origin-client-tools*/oc /usr/local/bin/
+    rm -rf openshift-origin-client-tools*
 elif [[ "$PACKAGE_MANAGER" == "apt" ]]; then
     sudo apt-get update && sudo apt-get -y upgrade;
      # This here is for vscode
@@ -68,6 +74,11 @@ elif [[ "$PACKAGE_MANAGER" == "apt" ]]; then
     #echo "deb [ arch=amd64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.0.list
     sudo apt-get update;
     sudo apt-get -y install build-essential coreutils automake autoconf openssl libtool unixodbc unzip curl git mongodb make jq;
+    # OpenShift client install
+    curl -LO https://github.com/openshift/origin/releases/download/v3.11.0/openshift-origin-client-tools-v3.11.0-0cbc58b-linux-64bit.tar.gz
+    tar zxvf openshift-origin-client-tools*
+    sudo mv openshift-origin-client-tools*/oc /usr/local/bin/
+    rm -rf openshift-origin-client-tools*
 
 else
     echo -e \\n"Packages not installed.\\n"\\n

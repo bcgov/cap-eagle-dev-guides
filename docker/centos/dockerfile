@@ -2,7 +2,7 @@ FROM centos:7
 # Set shell to bash instead of default sh
 SHELL ["/bin/bash", "-c"]
 # Install required packages to pull down repos and setup sudo
-RUN yum install -y git sudo
+RUN yum install -y git sudo unzip
 # Create user "dev" with a home and bash profiles
 RUN useradd -g root dev -m --create-home
 # Add user "dev" to sudoers as scripts run with sudo
