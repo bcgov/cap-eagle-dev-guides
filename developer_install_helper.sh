@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/shell_helper.sh;
+curl -LJO https://raw.githubusercontent.com/bcgov/cap-eagle-dev-guides/master/shell_helper.sh;
 source ./shell_helper.sh;
 
 asdfProfileWriterBrew(){
@@ -25,6 +25,7 @@ asdfProfileWriterNonBrew(){
     if ! grep "/asdf.bash" "$_profile_file"; then
         echo -e '\n. $HOME/.asdf/completions/asdf.bash' >> "$_profile_file";
     fi
+    source "$_profile_file";
 }
 
 asdfProfileSettings(){

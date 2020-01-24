@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/setup_helper.sh;
+curl -LJO https://raw.githubusercontent.com/bcgov/cap-eagle-dev-guides/master/setup_helper.sh;
 source ./setup_helper.sh;
 
 checkDependencies;

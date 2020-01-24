@@ -1,4 +1,4 @@
-curl -LJO https://raw.githubusercontent.com/bcgov/eagle-dev-guides/master/shell_helper.sh;
+curl -LJO https://raw.githubusercontent.com/bcgov/cap-eagle-dev-guides/master/shell_helper.sh;
 source ./shell_helper.sh;
 
 findTagValueInFile(){
@@ -97,6 +97,7 @@ installNodeIfNeeded(){
     NODEJS_CURRENT_VERSION=$(findTagValueInCommandOutput "v" "node -v");
     if [[ "$NODEJS_CURRENT_VERSION" != "$NODEJS_TARGET_VERSION" ]]; then
       echo "handling node version '${NODEJS_TARGET_VERSION}'";
+      source ~/.bashrc
       asdf install nodejs $NODEJS_TARGET_VERSION;
       asdf reshim nodejs;
     fi
