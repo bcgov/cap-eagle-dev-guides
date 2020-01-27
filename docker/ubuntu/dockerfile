@@ -3,7 +3,7 @@ FROM ubuntu:latest
 SHELL ["/bin/bash", "-c"]
 # Install required packages to pull down repos and setup sudo
 RUN apt update && \
-    apt install -y git sudo curl
+    apt install -y git sudo curl unzip
 # Create user "dev" with a home and bash profiles
 RUN useradd -g root dev -m --create-home
 # Add user "dev" to sudoers as scripts run with sudo
